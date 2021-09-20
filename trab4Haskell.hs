@@ -77,16 +77,14 @@ estoqueFinal = adicionaProduto f1 $ adicionaProduto f2 $ adicionaProduto f3 $ ad
 
 
 --Cálculo do total
---total :: Float
---total = (fromIntegral (snd monC)) * get2nd monE + (fromIntegral (snd telC)) * get2nd telE + (fromIntegral (snd tecC)) * get2nd tecE
 getQtd :: ([Char], Int) -> Float
 getQtd (_, x) = fromIntegral x
 
 minhalookup :: Eq a => a -> [(a,b)] -> Maybe b
-minhalookup _ [] = Nothing
-minhalookup aux1 ((val1,val2):aux2)
-    |aux1 == val1 = Just val2
-    |otherwise = minhalookup aux1 aux2
+minhalookup _ [] = Nothing --Valor vazio
+minhalookup aux1 ((val1,val2):aux2) --Concatena val1,val2 com aux2
+    |aux1 == val1 = Just val2 --Tipo opcional val2 retorna caso aux1 corresponda a val1
+    |otherwise = minhalookup aux1 aux2 --Caso contrário passa para o próximo elemento da lista
 
 getPrice :: ([Char], Float, Int) -> ([Char], Float)
 getPrice produto = (get1st produto, get2nd produto)
